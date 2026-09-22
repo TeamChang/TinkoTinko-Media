@@ -1,27 +1,35 @@
 /* =========================================================
    TinkoTinko Media - Design System
-   Palette driven by client hex colors:
-   #D09B75 (gold), #B28064 (terracotta), #CB9B75 (tan)
+   Palette driven by the TinkoTinko logo:
+   #EBC23D (gold), #DE6322 (orange), #DE336B (pink),
+   #7541DD (purple), #5A85F1 (blue)
    ========================================================= */
 
 :root {
     --color-bg: #F7F1E8;
     --color-bg-soft: #F1E8DA;
     --color-card: #FFFFFF;
-    --color-surface-dark: #2B1D14;
-    --color-surface-dark-alt: #3A2A1E;
+    --color-surface-dark: #221933;
+    --color-surface-dark-alt: #2E2245;
 
-    --color-text: #2B1D14;
-    --color-text-muted: #7A6552;
+    --color-text: #221933;
+    --color-text-muted: #6B5F7A;
     --color-text-inverse: #F7F1E8;
-    --color-text-inverse-muted: #CBB9A6;
+    --color-text-inverse-muted: #C9BEDB;
 
-    --color-gold: #D09B75;
-    --color-terracotta: #B28064;
-    --color-tan: #CB9B75;
+    --color-gold: #EBC23D;
+    --color-orange: #DE6322;
+    --color-pink: #DE336B;
+    --color-purple: #7541DD;
+    --color-blue: #5A85F1;
 
-    --color-border: rgba(43, 29, 20, 0.1);
+    --color-terracotta: #7541DD;
+    --color-tan: #DE336B;
+
+    --color-border: rgba(34, 25, 51, 0.1);
     --color-border-inverse: rgba(247, 241, 232, 0.14);
+
+    --gradient-brand: linear-gradient(135deg, #7541DD 0%, #5A85F1 50%, #DE336B 100%);
 
     --radius-lg: 14px;
     --radius-md: 10px;
@@ -140,35 +148,54 @@ body {
 }
 
 /* =========================================================
-   Hero - full-bleed cover: image, tint overlay, centered text
+   Hero - 80/20 split: brand-gradient panel + About Us panel
    ========================================================= */
-.hero-cover {
-    position: relative;
-    min-height: 100vh;
+.hero-split {
+    height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
     overflow: hidden;
 }
 
-.hero-cover-media {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
+.hero-main {
+    position: relative;
+    flex: 0 0 80%;
+    max-height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-brand);
+    overflow: hidden;
 }
 
-.hero-cover-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
+.hero-about-panel {
+    flex: 0 0 20%;
+    max-height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.6rem;
+    padding: 1.25rem 3rem;
+    background: var(--color-bg-soft);
+    border-top: 1px solid var(--color-border);
+    overflow-y: auto;
 }
 
-.hero-cover-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(74, 51, 36, 0.62);
+.hero-about-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.5px;
+}
+
+.hero-about-description {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    max-width: 60ch;
 }
 
 .hero-cover-content {
@@ -179,7 +206,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    padding-top: 140px;
+    padding-top: 60px;
     padding-bottom: 3rem;
 }
 
@@ -213,21 +240,6 @@ body {
     background: var(--color-tan);
 }
 
-.scroll-indicator {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--color-text-inverse-muted);
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    margin-top: 1.5rem;
-}
-
-.scroll-indicator:hover {
-    color: var(--color-text-inverse);
-}
-
 /* Animations */
 @keyframes fadeInUp {
     from {
@@ -247,7 +259,6 @@ body {
 .hero-title { animation-delay: 0.1s; }
 .hero-subtitle { animation-delay: 0.2s; }
 .hero-cover-content .cta-button { animation-delay: 0.3s; }
-.scroll-indicator { animation-delay: 0.4s; }
 
 /* Responsive */
 @media (max-width: 1024px) {
@@ -270,7 +281,7 @@ body {
     }
 
     .hero-cover-content {
-        padding-top: 120px;
+        padding-top: 60px;
         gap: 1.25rem;
     }
 
@@ -287,173 +298,11 @@ body {
 /* =========================================================
    Section basics
    ========================================================= */
-.about-section,
 .services-section,
 .contact-section {
     padding: 6rem 0;
     background: var(--color-bg);
 }
-
-/* =========================================================
-   About - bento cards
-   ========================================================= */
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 1rem;
-    align-items: stretch;
-}
-
-.about-content {
-    grid-column: 1;
-    grid-row: 1;
-    background: var(--color-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: var(--shadow-card);
-}
-
-.about-title {
-    font-size: 2.75rem;
-    font-weight: 700;
-    color: var(--color-text);
-    line-height: 0.95;
-    margin-bottom: 1.5rem;
-    letter-spacing: -1.5px;
-}
-
-.about-description {
-    font-size: 1.05rem;
-    color: var(--color-text-muted);
-    line-height: 1.7;
-}
-
-.about-stat {
-    grid-column: 2;
-    grid-row: 1;
-    text-align: center;
-    padding: 2.5rem 1.5rem;
-    background: var(--color-terracotta);
-    color: #fff;
-    border-radius: var(--radius-lg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-card);
-}
-
-.stat-icon {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1.25rem;
-    color: var(--color-gold);
-}
-
-.stat-number-large {
-    font-size: 3.25rem;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1;
-    margin-bottom: 0.75rem;
-}
-
-.stat-description {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.6;
-}
-
-.about-image-1 {
-    grid-column: 3;
-    grid-row: 1;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-card);
-}
-
-.about-image-2 {
-    grid-column: 1;
-    grid-row: 2;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-card);
-}
-
-.about-points {
-    grid-column: 2 / 4;
-    grid-row: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    background: var(--color-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 2.5rem;
-    box-shadow: var(--shadow-card);
-    justify-content: center;
-}
-
-.about-point {
-    display: flex;
-    gap: 1.25rem;
-    align-items: flex-start;
-}
-
-.point-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: var(--color-gold);
-    border-radius: 50%;
-    color: var(--color-surface-dark);
-    flex-shrink: 0;
-    margin-top: 0.25rem;
-}
-
-.about-point p {
-    font-size: 1rem;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-    margin: 0;
-}
-
-.about-photo {
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    object-fit: cover;
-    display: block;
-    filter: none;
-    border-radius: 0;
-    transition: transform 0.4s ease;
-}
-
-.about-image-1:hover .about-photo,
-.about-image-2:hover .about-photo {
-    transform: scale(1.05);
-}
-
-.about-title,
-.about-stat,
-.about-image-1,
-.about-image-2,
-.about-points {
-    animation: fadeInUp 0.8s ease-out both;
-}
-
-.about-content { animation: fadeInUp 0.8s ease-out both; }
-.about-stat { animation-delay: 0.1s; }
-.about-image-1 { animation-delay: 0.2s; }
-.about-image-2 { animation-delay: 0.3s; }
-.about-points { animation-delay: 0.4s; }
 
 /* =========================================================
    Services - bento cards
@@ -517,10 +366,18 @@ body {
     justify-content: center;
     width: 56px;
     height: 56px;
-    background: var(--color-surface-dark);
-    border-radius: var(--radius-sm);
-    color: var(--color-gold);
+    border-radius: 50%;
     flex-shrink: 0;
+}
+
+.service-category:nth-child(1) .category-icon {
+    background: rgba(222, 99, 34, 0.12);
+    color: var(--color-orange);
+}
+
+.service-category:nth-child(2) .category-icon {
+    background: rgba(90, 133, 241, 0.12);
+    color: var(--color-blue);
 }
 
 .category-title {
@@ -545,7 +402,8 @@ body {
 .service-bullet {
     width: 8px;
     height: 8px;
-    background: var(--color-terracotta);
+    background: transparent;
+    border: 1.5px solid var(--color-terracotta);
     border-radius: 50%;
     margin-top: 0.75rem;
     flex-shrink: 0;
@@ -586,10 +444,8 @@ body {
 }
 
 .contact-content {
-    max-width: 960px;
-    margin: 0 auto;
     text-align: center;
-    background: var(--color-surface-dark);
+    background: var(--gradient-brand);
     color: var(--color-text-inverse);
     border-radius: var(--radius-lg);
     padding: 4rem 3rem;
@@ -747,32 +603,8 @@ body {
 }
 
 @media (max-width: 768px) {
-    .about-section,
     .services-section {
         padding: 4rem 0;
-    }
-
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-    }
-
-    .about-content,
-    .about-stat,
-    .about-image-1,
-    .about-image-2,
-    .about-points {
-        grid-column: 1;
-        grid-row: auto;
-    }
-
-    .about-image-1,
-    .about-image-2 {
-        min-height: 260px;
-    }
-
-    .about-title {
-        font-size: 2.2rem;
     }
 
     .services-title {
