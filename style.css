@@ -81,7 +81,12 @@ body {
 .logo {
     display: flex;
     align-items: center;
-    color: var(--color-terracotta);
+}
+
+.logo-image {
+    height: 40px;
+    width: auto;
+    display: block;
 }
 
 .nav {
@@ -221,8 +226,14 @@ body {
 }
 
 .hero-title .accent {
-    color: var(--color-gold);
+    color: var(--color-text-inverse);
 }
+
+.hero-title .lt-gold { color: var(--color-gold); }
+.hero-title .lt-orange { color: var(--color-orange); }
+.hero-title .lt-pink { color: var(--color-pink); }
+.hero-title .lt-purple { color: var(--color-purple); }
+.hero-title .lt-blue { color: var(--color-blue); }
 
 .hero-subtitle {
     font-size: 1.45rem;
