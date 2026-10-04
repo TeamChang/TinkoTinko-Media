@@ -304,6 +304,26 @@ body {
     .hero-subtitle {
         font-size: 1.15rem;
     }
+
+    /* Let the About panel grow to fit its text instead of a fixed 20% slice */
+    .hero-split {
+        height: auto;
+        overflow: visible;
+    }
+
+    .hero-main {
+        flex: none;
+        max-height: none;
+        min-height: 80vh;
+        min-height: 80svh;
+    }
+
+    .hero-about-panel {
+        flex: none;
+        max-height: none;
+        overflow: visible;
+        padding: 2.5rem 1.5rem;
+    }
 }
 
 /* =========================================================
